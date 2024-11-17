@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="/index">Home</a>
+    <a href="/register">Register</a>
+    <a href="/posts">Posts</a>
+  </nav>
+
+  <header>
+    <h1>Posts</h1>
+  </header>
+
+  <section>
+    <% if (posts.length > 0) { %>
+      <ul>
+        <% posts.forEach(post => { %>
+          <li>
+            <h3><%= post.title %></h3>
+            <p><%= post.content %></p>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No posts available.</p>
+    <% } %>
+  </section>
+
+  <footer>
+    <p>&copy; Tleuberdinova Aiym, BDA-2302 </p>
+  </footer>
+
+</body>
+</html>

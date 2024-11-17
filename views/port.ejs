@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Общие стили */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+    nav {
+        background-color: #333;
+  color: white;
+  width: auto;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+nav:hover {
+  background-color: #444;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1em;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #5c6bc0;
+  transform: scale(1.05);
+}
+
+nav a.active {
+  background-color: #5c6bc0;
+}
+
+.nav-logo {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: white;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav a {
+    margin: 10px 0;
+  }
+}
+
+    header {
+      background-color: #5c6bc0;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-bottom: 3px solid #5c6bc0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    header p {
+      font-size: 1.1em;
+    }
+
+    /* Стиль для секций */
+    section {
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      max-width: 1000px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap; /* Добавляем возможность для контента сжиматься на мобильных устройствах */
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      font-size: 1.8em;
+      color: #5c6bc0;
+      margin-bottom: 20px;
+    }
+
+    /* Стиль для информации о стране */
+    .country-info-text {
+      flex: 1; /* Текст будет занимать оставшуюся ширину */
+      padding-right: 20px;
+      max-width: 50%; /* Ограничиваем ширину текста до 50% */
+    }
+
+    .country-info-text p {
+      font-size: 1.2em;
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .country-info-text strong {
+      color: #333;
+      font-weight: bold;
+    }
+
+    .country-info-img {
+      max-width: 50%; /* Флаг теперь будет занимать 50% */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .country-info-img img {
+      width: 100%;
+      height: auto;
+    }
+
+    .country-info-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Стиль для графика */
+    #currencyChart {
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .currency-rate {
+      font-size: 1.1em;
+      margin: 10px 0;
+      color: #666;
+    }
+
+    /* Стиль для футера */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      font-size: 1em;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Добавление анимации */
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="/index">Home</a>
+        <a href="/register">Register</a>
+        <a href="/posts">Posts</a>
+      </nav>
+
+  <header class="fade-in">
+    <h1>Welcome to the Portfolio</h1>
+    <p>User: <%= user.username %> (<%= userRole %>)</p>
+  </header>
+
+   <!-- Новый раздел с информацией о стране -->
+   <section class="country-info fade-in">
+    <div class="country-info-text">
+      <h2>Country Information</h2>
+      <p><strong>Country:</strong> <%= countryData.title %></p>
+      <p><strong>Capital:</strong> <%= countryData.description %></p>
+      <p><strong>Population:</strong> <%= countryData.population %></p>
+      <p><strong>Current Time:</strong> <%= countryData.timestamps %></p>
+    </div>
+    <div class="country-info-img">
+      <img src="<%= countryData.flag %>" alt="Flag of <%= countryData.title %>" />
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <h2>Currency Rates</h2>
+    <% if (cityData && cityData.rates) { %>
+      <canvas id="currencyChart" width="400" height="200"></canvas>
+      <script>
+        const currencyData = <%- JSON.stringify(cityData.rates) %>;
+
+        const labels = Object.keys(currencyData);
+        const rates = labels.map(date => currencyData[date].EUR); // Данные по курсу EUR
+
+        const ctx = document.getElementById('currencyChart').getContext('2d');
+        const currencyChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'KZT to EUR Exchange Rate',
+              data: rates,
+              borderColor: 'rgb(75, 192, 192)',
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Currency Exchange Rates Over Time',
+                font: {
+                  size: 18
+                },
+                color: '#333'
+              }
+            }
+          }
+        });
+      </script>
+    <% } else { %>
+      <p class="currency-rate">Currency data is not available.</p>
+    <% } %>
+  </section>
+
+  <footer>
+    <p>&copy; Tleuberdinova Aiym, BDA-2302 </p>
+  </footer>
+
+</body>
+</html>
